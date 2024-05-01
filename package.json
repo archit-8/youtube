@@ -6,18 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/archit-8/youtube.git"
-  },
+  "repository": {},
   "keywords": [
     "backend",
     "javascript"
   ],
   "author": "archit singh chauhan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/archit-8/youtube/issues"
-  },
   "homepage": "https://github.com/archit-8/youtube#readme"
 }
