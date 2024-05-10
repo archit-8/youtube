@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import connectDb from "./db/index.js";
 import { app } from "./app.js";
 dotenv.config({
-  path: "./env",
+  path: "/.env",
 });
 
 connectDb()
@@ -20,7 +20,4 @@ connectDb()
     console.log("monogdb connection failed", error);
     process.exit(1);
   });
-app.post("/test", (req, res) => {
-  res.send("Hello World");
-});
 export { app };

@@ -22,18 +22,18 @@ const registerUser = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, "please fill all the fields");
   }
-  const exitedUser = User.findOne({
+  const exitedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
   if (exitedUser) {
     throw new ApiError(409, "username or email already exist");
   }
-  const avatrLocalPath = req.files?.avatar[0]?.path;
+  const avatarLocalPath = req.files?.avatar[0]?.path;
   const coverImageLocalPath = req.files?.coverImage[0]?.path;
-  if (!avatrLocalPath) {
+  if (!avatarLocalPath) {
     throw new ApiError(400, "please upload avatar  images");
   }
-  const avatar = await uploadCloudinary(avatrLocalPath);
+  const avatar = await uploadCloudinary(avatarLocalPath);
   const coverImage = await uploadCloudinary(coverImageLocalPath);
   if (!avatar) {
     throw new ApiError(500, "avatar image upload failed");
@@ -47,8 +47,7 @@ const registerUser = asyncHandler(async (req, res) => {
     coverImage: coverImage?.url || "",
   });
 
-  const CreatedUser = await user
-    .findbyId(user._id)
+  const CreatedUser = await user.findById(user._id)
     .select("-password -refeshToken");
   if (!CreatedUser) {
     throw new ApiError(500, "user creation failed");
